@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-brand">Task Manager</span>
+        <div class="navbar-right">
+            <span class="welcome-msg">Welcome, {{ current_user.name }}!</span>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <h1>Your Tasks</h1>
+        <div class="task-container">
+            {% for task in tasks %}
+            <div class="task-card">
+                <div class="task-content">
+                    <span class="task-text">{{ task.text }}</span>
+                    {% if task.due_date %}
+                        <span class="task-date">Due: {{ task.due_date.strftime('%b %d, %Y') }}</span>
+                    {% endif %}
+                    <span class="task-priority priority-{{ task.priority }}">{{ task.priority|capitalize }} Priority</span>
+                </div>
+                <div class="task-actions">
+                    <button class="complete-btn">✓</button>
+                    <button class="edit-btn">✎</button>
+                    <button class="delete-btn">🗑</button>
+                </div>
+            </div>
+            {% else %}
+            <div class="no-tasks">
+                <img src="{{ url_for('static', filename='images/no-tasks.svg') }}" alt="No tasks">
+                <p>You don't have any tasks yet!</p>
+            </div>
+            {% endfor %}
+        </div>
+        <form method="POST" action="{{ url_for('tasks') }}" class="add-task-form">
+            <input type="text" name="task_text" placeholder="What needs to be done?" required>
+            <input type="date" name="due_date" class="due-date-input">
+            <select name="priority">
+                <option value="low">Low Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="high">High Priority</option>
+            </select>
+            <button type="submit" class="add-task-btn">Add Task</button>
+        </form>
+    </div>
+</body>
+</html>

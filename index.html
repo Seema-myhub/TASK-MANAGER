@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-brand">Task Manager</span>
+        <div class="navbar-right">
+            <a href="{{ url_for('login') }}" class="logout-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="logout-btn">Sign Up</a>
+        </div>
+    </nav>
+    <div class="hero-container">
+        <h1 class="hero-title">Welcome to Task Manager</h1>
+        <p class="hero-desc">
+            Organize your tasks, set priorities, and boost your productivity.<br>
+            Simple, fast, and beautifully designed for your daily workflow.
+        </p>
+        <a href="{{ url_for('signup') }}" class="hero-btn">Get Started</a>
+        <div style="margin-top:32px;">
+    
+        </div>
+    </div>
+</body>
+</html>
